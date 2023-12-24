@@ -1,10 +1,38 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function form() {
 
     const [title,setTitle]= useState("");
     const [desc,setDesc] = useState("");
     const [mainTask,setMainTask]= useState([]);
+
+    const notify = () =>{
+      toast.success('Task Added Successfully', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
+
+    const deleteNotify = ()=>{
+      toast.error('Task Removed Successfully', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
 
     const submitHandler = (e)=>{
         e.preventDefault();
@@ -15,6 +43,7 @@ function form() {
         setDesc("");
 
         console.log(mainTask);
+        notify();
     }
 
     const deleteHandler= (i)=>{
@@ -22,6 +51,7 @@ function form() {
     
         copyTask.splice(i,1);
         setMainTask(copyTask)
+        deleteNotify();
       }
     
       let renderTask = "No Task Available";
@@ -44,6 +74,7 @@ function form() {
           
         )});
       }
+      
 
     return (
         <>
